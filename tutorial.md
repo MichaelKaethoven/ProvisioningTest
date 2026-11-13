@@ -714,6 +714,8 @@ git remote add origin https://github.com/jouw-github-naam/ProvisioningTest.git
 git push -u origin main
 ```
 
+> **Let op:** een release wordt gebouwd uit de code die **op GitHub** staat, niet uit je lokale bestanden. Vul `GITHUB_OWNER` in vóór je commit. Heb je al gepusht met `"jouw-github-naam"`? Commit en push dan eerst je aangepaste `config.h`, en maak pas daarna de tag. Controleer met `git status` dat er niets meer openstaat.
+
 **3. Maak de eerste release:**
 
 ```bash

@@ -41,8 +41,8 @@ constexpr int MIN_MEASURE_INTERVAL = 1;
 constexpr int MAX_MEASURE_INTERVAL = 86400; // 1 dag
 
 // RGB LED op GPIO 5: kleur (0-255 per kanaal) en knippertijden (seconden)
-constexpr uint8_t RGB_COLOR_R = 0;
-constexpr uint8_t RGB_COLOR_G = 0;
+constexpr uint8_t RGB_COLOR_R = 60;
+constexpr uint8_t RGB_COLOR_G = 60;
 constexpr uint8_t RGB_COLOR_B = 40; // gedimd blauw; WS2812 op 255 is fel
 constexpr int DEFAULT_LED_ON_SEC = 5;
 constexpr int DEFAULT_LED_OFF_SEC = 5;
