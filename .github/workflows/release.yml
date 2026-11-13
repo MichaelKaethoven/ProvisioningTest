@@ -1,0 +1,40 @@
+# Bouwt de firmware en publiceert een GitHub Release zodra je een tag
+# zoals v1.0.0 pusht:   git tag v1.0.0 && git push origin v1.0.0
+name: Release firmware
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write   # nodig om een release aan te maken
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: PlatformIO installeren
+        run: pip install platformio
+
+      - name: Firmware bouwen met versienummer uit de tag
+        env:
+          PLATFORMIO_BUILD_FLAGS: -DFW_VERSION=\"${{ github.ref_name }}\"
+        run: pio run -e dfrobot_firebeetle2_esp32e
+
+      - name: Release-bestanden klaarzetten
+        run: |
+          cp .pio/build/dfrobot_firebeetle2_esp32e/firmware.bin firmware.bin
+          echo "${{ github.ref_name }}" > version.txt
+
+      - name: GitHub Release publiceren
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            firmware.bin
+            version.txt
